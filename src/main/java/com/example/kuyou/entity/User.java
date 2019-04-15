@@ -4,12 +4,12 @@ public class User {
 
     private long u_id;
     private String bg_img;
-    private enum travel_stat{Y,N};
+    private enum travel_stat{Y,N}
     private String head;
     private String nick;
     private String signature;
     private int age;
-    private enum sex{男,女};
+    private enum sex{男,女}
     private String city;
     private String school;
     private long thumb_num;
@@ -23,6 +23,8 @@ public class User {
     private long activity_num;
     private String phone;
     private String password;
+    private enum resource_post_kind{COLLECT_MUSIC,DIS_COLLECT_MUSIC,COLLECT_LABEL,DIS_COLLECT_LABEL,THUMB_VIDEO,DIS_THUMB_VIDEO,
+        THUMB_COMMON,DIS_THUMB_COMMON,NOTICE_USER,DIS_NOTICE_USER}
 
     public long getU_id() {
         return u_id;

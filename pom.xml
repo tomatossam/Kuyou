@@ -117,6 +117,11 @@
             <artifactId>nekohtml</artifactId>
             <version>1.9.22</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.31</version>
+        </dependency>
 
         <!--添加依赖结束-->
     </dependencies>

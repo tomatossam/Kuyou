@@ -10,6 +10,7 @@ public class KuyouApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(KuyouApplication.class, args);
+
     }
 
 }
