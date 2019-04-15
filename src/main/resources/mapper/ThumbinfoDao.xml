@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.example.kuyou.dao.ThumbinfoDao">
+
+    <select id="getThumbinfo" resultType="com.example.kuyou.entity.Thumbinfo" parameterType="long">
+        select v_id,u_id,vt_time,vt_date,'THUMB_VIDEO' as thumb_kind
+        from video_thumb where u_id=#{u_id}
+        union all
+        select vc_id,u_id,c_thumb_time,c_thumb_date,'THUMB_COMMON' as thumb_kind
+        from common_thumb where u_id=#{u_id}
+        ORDER BY vt_date DESC,vt_time DESC
+    </select>
+
+</mapper>

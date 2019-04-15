@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.example.kuyou.dao.MusicinfoDao">
+
+    <select id="getMusicinfo" resultType="com.example.kuyou.entity.Musicinfo" parameterType="map">
+        select m_creator,user_num,m_cover,m_content,
+        (select count(*) from music_collect where u_id=#{u_id} and m_id=#{m_id}) as isCollected
+        from music where m_id=#{m_id}
+    </select>
+
+</mapper>

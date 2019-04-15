@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.example.kuyou.dao.UserDao">
+
+    <select id="getOtherinfo" resultType="map" parameterType="long">
+        select bg_img,signature,age,sex,city,school,thumb_num,following_num,fans_num,works_num,
+        like_num,country_num,city_num,place_num,activity_num
+        from user where u_id=#{id}
+    </select>
+
+<!-- 音乐收藏-->
+    <insert id="collectMusic" parameterType="map">
+        insert into music_collect(u_id,m_id) values(#{u_id}, #{resource_id})
+    </insert>
+    <delete id="discollectMusic" parameterType="map">
+        delete from music_collect where (u_id=#{u_id} and m_id=#{resource_id})
+    </delete>
+
+<!-- 标签收藏-->
+    <insert id="collectLabel" parameterType="map">
+        insert into label_collect(u_id,l_id) values(#{u_id}, #{resource_id})
+    </insert>
+    <delete id="discollectLabel" parameterType="map">
+        delete from label_collect where (u_id=#{u_id} and l_id=#{resource_id})
+    </delete>
+
+<!--视频点赞-->
+    <insert id="thumbVideo" parameterType="map">
+        insert into video_thumb(u_id,v_id,vt_time,vt_date) values(#{u_id}, #{resource_id}, #{timeA}, #{timeB})
+    </insert>
+    <update id="addthumbVideo" parameterType="long">
+        update video set v_thumb_num=v_thumb_num+1 where v_id=#{resource_id}
+    </update>
+    <delete id="disthumbVideo" parameterType="map">
+        delete from video_thumb where (u_id=#{u_id} and v_id=#{resource_id})
+    </delete>
+    <update id="delthumbVideo" parameterType="long">
+        update video set v_thumb_num=v_thumb_num-1 where v_id=#{resource_id}
+    </update>
+
+<!--评论点赞-->
+    <insert id="thumbCommon" parameterType="map">
+        insert into common_thumb(u_id,vc_id,c_thumb_date,c_thumb_time) values(#{u_id}, #{resource_id}, #{timeA}, #{timeB})
+    </insert>
+    <update id="addthumbCommon" parameterType="long">
+        update video_common set vc_thumb_num=vc_thumb_num+1 where vc_id=#{resource_id}
+    </update>
+    <delete id="disthumbCommon" parameterType="map">
+        delete from common_thumb where (u_id=#{u_id} and vc_id=#{resource_id})
+    </delete>
+    <update id="delthumbCommon" parameterType="long">
+        update video_common set vc_thumb_num=vc_thumb_num-1 where vc_id=#{resource_id}
+    </update>
+
+<!--用户关注-->
+    <insert id="noticeUser" parameterType="map">
+        insert into fans(u_id,following_id,f_date,f_time) values(#{u_id}, #{resource_id}, #{timeA}, #{timeB})
+    </insert>
+
+    <update id="addFollowingnum" parameterType="long">
+        update user set following_num=following_num+1 where u_id=#{u_id}
+    </update>
+
+    <update id="addFannum" parameterType="long">
+        update user set fans_num=fans_num+1 where u_id=#{resource_id}
+    </update>
+
+    <delete id="disnoticeUser" parameterType="map">
+        delete from fans where (u_id=#{u_id} and following_id=#{resource_id})
+    </delete>
+
+    <update id="delFollowingnum" parameterType="long">
+        update user set following_num=following_num-1 where u_id=#{u_id}
+    </update>
+
+    <update id="delFannum" parameterType="long">
+        update user set fans_num=fans_num-1 where u_id=#{resource_id}
+    </update>
+
+<!--旅行状态-->
+    <select id="travelState1" resultType="int" parameterType="map">
+        select count(*) from view
+        where country=#{place1} and (province=#{place2} or city=#{place2} or place=#{place2} or position=#{place2})
+    </select>
+    <select id="travelState2" resultType="int" parameterType="map">
+        select count(*) from view
+        where country=#{place1} and ( (province=#{place2} and (city=#{place3} or place=#{place3} or position=#{place3}))  or
+        (city=#{place2} and (place=#{place3} or position=#{place3})) or
+        (place=#{place2} and position=#{place3}) )
+    </select>
+    <select id="travelState3" resultType="int" parameterType="map">
+        select count(*) from view
+        where country=#{place1} and ( (province=#{place2} and city=#{place3} and (place=#{place4} or position=#{place4})) or
+        (province=#{place2} and place=#{place3} and position=#{place4}) or
+        (city=#{place2} and (place=#{place3} and position=#{place4}) ) )
+    </select>
+    <select id="travelState4" resultType="int" parameterType="map">
+        select count(*) from view
+        where country=#{place1} and province=#{place2} and city=#{place3} and place=#{place4} and position=#{place5}
+    </select>
+
+
+    <update id="changeTravelstate" parameterType="long">
+        update user set travel_stat='Y' where u_id=#{u_id}
+    </update>
+    <update id="cancelTravelstate" parameterType="long">
+        update user set travel_stat='N' where u_id=#{u_id}
+    </update>
+
+
+</mapper>

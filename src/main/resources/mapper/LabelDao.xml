@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.example.kuyou.dao.LabelDao">
+
+    <select id="getLabeltype" resultType="com.example.kuyou.entity.Label" parameterType="String">
+        select label.l_id,l_kind,a_id
+        from label,activity where l_content=#{content} and label.l_id=activity.l_id
+    </select>
+
+</mapper>

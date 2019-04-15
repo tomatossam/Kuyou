@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.example.kuyou.dao.ActivityinfoDao">
+
+    <select id="getActitityfinfo" resultType="com.example.kuyou.entity.Activityinfo" parameterType="long">
+        select a_id,activity.l_id,a_indro,start_date,end_date,a_position,look_num,a_cover,u_id
+        from activity,label where activity.l_id=#{l_id} and activity.l_id=label.l_id
+    </select>
+
+</mapper>
+
