@@ -8,6 +8,7 @@ import com.example.kuyou.function.VideoInfo;
 import com.example.kuyou.impl.*;
 import com.example.kuyou.object.Video;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
+@CrossOrigin
 @RestController
 @RequestMapping("video")
 public class VideoController {

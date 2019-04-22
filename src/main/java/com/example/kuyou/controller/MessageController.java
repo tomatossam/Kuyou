@@ -7,6 +7,7 @@ package com.example.kuyou.controller;
 import com.example.kuyou.impl.CommonMessage;
 import com.example.kuyou.object.MessageCommon;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("message")
 public class MessageController {

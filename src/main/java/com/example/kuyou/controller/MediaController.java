@@ -5,6 +5,7 @@ package com.example.kuyou.controller;
  * */
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 
+@CrossOrigin
 @RestController
 @RequestMapping("media")
 public class MediaController {

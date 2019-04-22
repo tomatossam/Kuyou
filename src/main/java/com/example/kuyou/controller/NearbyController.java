@@ -8,6 +8,7 @@ package com.example.kuyou.controller;
 import com.example.kuyou.impl.NearbyHot;
 import com.example.kuyou.object.HotNearby;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
@@ -15,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("nearby")
 public class NearbyController {
