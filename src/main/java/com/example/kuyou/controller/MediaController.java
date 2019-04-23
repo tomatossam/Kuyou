@@ -49,6 +49,9 @@ public class MediaController {
         }else if(kind.equals("MUSIC")){
             file = new File(fileStr + "\\music\\" + route);
             sendMedia(response, file, "audio/mp3");
+        }else if(kind.equals("COUNTRY")){
+            file = new File(fileStr + "\\country\\" + route + ".png");
+            sendMedia(response, file, "image/png");
         }
     }
 

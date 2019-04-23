@@ -15,7 +15,7 @@ import java.util.List;
 public class NearbyHot {
     private JdbcOperations jdbcOperations;
 
-    // 查询location对应的多个热门标签，小范围优先, 没有去重
+    // 查询location对应的多个热门标签，小范围优先
     private static final String SELECT_POSITION =
             "select l_id, l_content, l_kind from label,view " +
                     "where label.view_id = view.view_id and " +

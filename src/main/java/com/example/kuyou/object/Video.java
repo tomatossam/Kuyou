@@ -25,6 +25,8 @@ public class Video {
 
     private String m_title;
 
+    private String english_name;
+
     // 保存国家
     Object[] countries;
 
@@ -170,5 +172,13 @@ public class Video {
 
     public void setCountries(Object[] countries) {
         this.countries = countries;
+    }
+
+    public String getEnglish_name() {
+        return english_name;
+    }
+
+    public void setEnglish_name(String english_name) {
+        this.english_name = english_name;
     }
 }

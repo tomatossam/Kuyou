@@ -23,7 +23,7 @@ public class VideoTrace implements VideoInfo {
             "select v_id, v_cover, v_content, v_creator, v_date, " +
                     "video.m_id, v_description, v_thumb_num, " +
                     "share_num, common_num, video.view_id, country, " +
-                    "province, city, place, position, m_title " +
+                    "province, city, place, position, m_title, english_name " +
                     "from video, view, music " +
                     "where video.v_creator = ? and view.view_id = video.view_id " +
                     "and music.m_id = video.m_id " +
@@ -41,7 +41,10 @@ public class VideoTrace implements VideoInfo {
                 new Object[]{id});
         Set<String> countrySet = new HashSet<>();
         for(Video video:videoList){
-            countrySet.add(video.getCountry());
+            String urlCountry =
+                    "http://192.168.43.95:8080/media/get" +
+                            "?media_request_kind=COUNTRY&media_content=" + video.getCountry();
+            countrySet.add(urlCountry);
         }
         Object[] countries = countrySet.toArray();
         videoList.get(0).setCountries(countries);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -33,5 +34,11 @@ public class UserController2 {
         long u_id = Long.parseLong(request.getParameter("u_id"));
 
         return context.getBean(UserCreator.class).getCreator(u_id, v_creator);
+    }
+
+    @RequestMapping(value = "fans", method = RequestMethod.GET)
+    public List<Creator> getFans(HttpServletRequest request){
+        long u_id = Long.parseLong(request.getParameter("u_id"));
+        return context.getBean(UserCreator.class).getFans(u_id);
     }
 }
