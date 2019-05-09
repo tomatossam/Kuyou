@@ -46,19 +46,27 @@ public class SendEmailServiceImpl implements SendEmailService {
         return checkCode;
     }
 
-    public String userRegister(Email user) {
-        Email newUser = sendEmailDao.checkCode(user);
+    public String userRegister(String email,String code_num,String password) {
+        Email newUser = sendEmailDao.checkCode(code_num);
         if (newUser != null) {
-            if (user.getEmail().equals(newUser.getEmail())) {
-                sendEmailDao.register2(user);
-                return "1";
+            if (email.equals(newUser.getEmail())) {
+                if (password.length() < 5 || password.length() > 15)
+                    return "2";   //密码超出范围
+                else if (sendEmailDao.getStatus(email).equals("1"))
+                    return "3";     //邮箱已注册
+                else {
+                    Map<String,Object> group=new HashMap<String, Object>();
+                    group.put("code_num",code_num);
+                    group.put("password",password);
+                    sendEmailDao.register2(group);
+                    return "1"; //注册成功
+                }
             }
-            else if(user.getPassword().length()<5||user.getPassword().length()>15)
-                return "2";
-            else return "3";
-        }
             else
-                return "3";
+                return "4";
+        }
+        else
+            return "4";  //验证码错误
     }
 
     public String userLogin(String email,String pwd){
@@ -67,13 +75,39 @@ public class SendEmailServiceImpl implements SendEmailService {
         group.put("email",email);
         group.put("pwd",pwd);
         Email newUser = sendEmailDao.loginUser(group);
-        if(count==0)
-            return "0";
-        else{
-            if(email.equals(newUser.getEmail()) && pwd.equals(newUser.getPassword()))
-                return "1";
-            else return "0";
+        if(newUser==null) {
+            if (count == 0)
+                return "3";//未注册
+            else return "2";//账号或密码错误
         }
+        else{
+            if (sendEmailDao.getStatus(email).equals("0"))
+                    return "3";//未注册
+            else return "1";//登录成功
+            }
+    }
+
+    public String userAlterpwd(String email,String code_num,String password) {
+        Email newUser = sendEmailDao.checkCode(code_num);
+        if (newUser != null) {
+            if (email.equals(newUser.getEmail())) {
+                if (password.length() < 5 || password.length() > 15)
+                    return "2";   //密码超出范围
+                else if (sendEmailDao.getStatus(email).equals("0"))
+                    return "3";     //邮箱未注册
+                else {
+                    Map<String,Object> group=new HashMap<String, Object>();
+                    group.put("code_num",code_num);
+                    group.put("password",password);
+                    sendEmailDao.register2(group);
+                    return "1"; //密码修改成功
+                }
+            }
+            else
+                return "3";
+        }
+        else
+            return "4";  //验证码错误
 
     }
 

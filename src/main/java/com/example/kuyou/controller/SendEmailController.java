@@ -18,16 +18,16 @@ public class SendEmailController {
 
     //注册
     @RequestMapping(value = "user/register",method = RequestMethod.POST,produces= "application/json;charset=UTF-8")
-    public String userRegister(@RequestBody Email user){return sendEmailService.userRegister(user);}
+    public String userRegister(@RequestParam String email, @RequestParam String code_num, @RequestParam String password){return sendEmailService.userRegister(email,code_num,password);}
 
     //登录
     @RequestMapping(value = "user/login",method = RequestMethod.POST,produces= "application/json;charset=UTF-8")
-    public String userLogin(@RequestParam String email, @RequestParam String pwd)
-    {return sendEmailService.userLogin(email,pwd);}
+    public String userLogin(@RequestParam String email, @RequestParam String password)
+    {return sendEmailService.userLogin(email,password);}
 
     //修改密码
     @RequestMapping(value = "user/alterpwd",method = RequestMethod.POST,produces= "application/json;charset=UTF-8")
-    public String alterPwd(@RequestBody Email user){return sendEmailService.userRegister(user);}
+    public String alterPwd(@RequestParam String email, @RequestParam String code_num, @RequestParam String password){return sendEmailService.userAlterpwd(email,code_num,password);}
 
     //修改个人资料
     @RequestMapping(value = "user/alterinfo",method = RequestMethod.POST,produces= "application/json;charset=UTF-8")

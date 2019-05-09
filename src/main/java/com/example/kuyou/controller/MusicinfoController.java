@@ -5,6 +5,7 @@ import com.example.kuyou.service.MusicinfoService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -15,5 +16,5 @@ public class MusicinfoController {
 
     //接口15
     @RequestMapping(value = "music/information",method = RequestMethod.GET)
-    public Musicinfo getMusicinfomations(@RequestParam int m_id,@RequestParam int u_id){return musicinfoService.getMusicinfomation(m_id,u_id);}
+    public List<Musicinfo> getMusicinfomations(@RequestParam long u_id, @RequestParam String m_kind){return musicinfoService.getMusicinfomation(u_id,m_kind);}
 }

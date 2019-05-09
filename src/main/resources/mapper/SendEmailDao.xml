@@ -18,12 +18,12 @@
     </update>
 
     <!--表示已注册成功，用户状态更新为1-->
-    <update id="register2" parameterType="com.example.kuyou.entity.Email" >
+    <update id="register2" parameterType="map" >
     update user set password=#{password},status=1 where email=#{email}
     </update>
 
     <!--根据激活码code查询用户-->
-    <select id="checkCode" parameterType="com.example.kuyou.entity.Email" resultType="com.example.kuyou.entity.Email">
+    <select id="checkCode" parameterType="String" resultType="com.example.kuyou.entity.Email">
     select * from user where code_num = #{code_num}
   </select>
 
@@ -34,6 +34,11 @@
     <update id="alterInfo" parameterType="map" >
     update user set nick=#{nick},sex=#{sex},signature=#{signature},age=#{age} where u_id=#{u_id}
     </update>
+
+    <!--根据邮箱获取status-->
+    <select id="getStatus" parameterType="String" resultType="String">
+    select status from user where email = #{email}
+    </select>
 
 
 

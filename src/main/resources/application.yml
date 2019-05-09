@@ -66,5 +66,3 @@ pagehelper:
   params: count=countSql
   returnPageInfo: check
 
-cbs:
-  imagesPath: file:E:/fileUpload/

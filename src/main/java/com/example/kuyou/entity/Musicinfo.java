@@ -2,26 +2,26 @@ package com.example.kuyou.entity;
 
 public class Musicinfo {
 
-    private long m_creator;
-    private long user_num;
+    private String nick;
+    private String m_title;
     private String m_cover;
     private String m_content;
     private long isCollected;
 
-    public long getM_creator() {
-        return m_creator;
+    public String getNick() {
+        return nick;
     }
 
-    public void setM_creator(long m_creator) {
-        this.m_creator = m_creator;
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 
-    public long getUser_num() {
-        return user_num;
+    public String getM_title() {
+        return m_title;
     }
 
-    public void setUser_num(long user_num) {
-        this.user_num = user_num;
+    public void setM_title(String m_title) {
+        this.m_title = m_title;
     }
 
     public String getM_cover() {
@@ -44,7 +44,7 @@ public class Musicinfo {
         return isCollected;
     }
 
-    public void setIsCollected(int isCollected) {
+    public void setIsCollected(long isCollected) {
         this.isCollected = isCollected;
     }
 }

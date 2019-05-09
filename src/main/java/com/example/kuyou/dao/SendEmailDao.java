@@ -12,13 +12,15 @@ public interface SendEmailDao {
 
     public void alterCodenum(Map<String,Object> group);
 
-    public void register2(Email user);
+    public void register2(Map<String,Object> group);
 
-    Email checkCode(Email user);
+    Email checkCode(String email);
 
     Email loginUser(Map<String,Object> group);
 
     public void alterInfo(Map<String,Object> group);
+
+    public String getStatus(String email);
 
 
 }
