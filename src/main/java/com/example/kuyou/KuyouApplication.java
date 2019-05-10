@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+
 @SpringBootApplication(scanBasePackages={"com.example.kuyou.*"})
 @MapperScan("com.example.kuyou.dao")
 public class KuyouApplication {
@@ -15,5 +16,8 @@ public class KuyouApplication {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(DataConfig.class);
     }
+
+
+
 
 }

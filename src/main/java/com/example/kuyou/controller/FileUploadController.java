@@ -84,9 +84,6 @@ public class FileUploadController {
         //创建文件路径
         File dest = new File(path);
 
-        //判断文件是否已经存在
-        if (dest.exists()) { return "文件已经存在"; }
-
         //判断文件父目录是否存在
         if (!dest.getParentFile().exists()) { dest.getParentFile().mkdir(); }
 

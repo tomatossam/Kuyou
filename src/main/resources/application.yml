@@ -1,13 +1,13 @@
 server:
   tomcat:
     uri-encoding: UTF-8
-
 spring:
   http:
     encoding:
       charset: UTF-8
       force: true
       enabled: true
+
   mail:
     port: 25
     protocol: smtp
