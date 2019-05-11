@@ -66,7 +66,7 @@ public class FileUploadController {
         System.out.println(System.currentTimeMillis() - start);
     }
 
-    //视频上传
+    //短视频上传
     @RequestMapping(value = "camera/upload",method = RequestMethod.POST)
     public String uploadVideo(@RequestParam int v_creator, @RequestParam String position,@RequestParam  int m_id,
                               @RequestParam  String label,@RequestParam String v_description,@RequestParam("fileName") MultipartFile file){
@@ -87,21 +87,18 @@ public class FileUploadController {
         //判断文件父目录是否存在
         if (!dest.getParentFile().exists()) { dest.getParentFile().mkdir(); }
 
-
         try {
             //上传文件
             file.transferTo(dest); //保存文件
-            System.out.print("保存文件路径"+path+"\n");
-            v_content="http://192.168.43.95:8080/media/get?media_request_kind=VIDEO&media_content="+fileName;//本地运行项目
-            System.out.print("保存的完整url===="+v_content+"\n");
-
+            System.out.print("保存短视频文件路径"+path+"\n");
+            v_content=fileName;//本地运行项目
         } catch (IOException e) {
             return "上传失败";
         }
 
         try {
             FileUploadController.fetchFrame(path,path2);
-            v_cover="http://192.168.43.95:8080/media/get?media_request_kind=COVER_VIDEO&media_content="+fileName2;
+            v_cover=fileName2;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -126,11 +123,9 @@ public class FileUploadController {
         String path;
         if(cover_kind.equals("background_cover")) {
             path = "F:/kuYou/background/" + fileName;
-            imgkind="BACKGROUND";
         }
         else if(cover_kind.equals("head_cover")) {
             path = "F:/kuYou/head/" + fileName;
-            imgkind="HEAD";
         }
         else return "0";
 
@@ -143,9 +138,8 @@ public class FileUploadController {
         try {
             //上传文件
             file.transferTo(dest); //保存文件
-            System.out.print("保存文件路径"+path+"\n");
-            imgkind="http://192.168.43.95:8080/media/get?media_request_kind="+imgkind+"&media_content="+fileName;//本地运行项目
-            System.out.print("保存的完整url===="+imgkind+"\n");
+            System.out.print("保存图片文件路径"+path+"\n");
+            imgkind=fileName;//本地运行项目
         } catch (IOException e) {
             return "0";
         }

@@ -52,9 +52,8 @@ public class ActivityinfoController {
         try {
             //上传文件
             file.transferTo(dest); //保存文件
-            System.out.print("保存文件路径"+path+"\n");
-            a_cover="http://192.168.43.95:8080/media/get?media_request_kind=COVER_ACTIVITY&media_content="+fileName;//本地运行项目
-            System.out.print("保存的完整url===="+a_cover+"\n");
+            System.out.print("保存活动封面文件路径"+path+"\n");
+            a_cover=fileName;//本地运行项目
         } catch (IOException e) {
             return "0";
         }
