@@ -1,10 +1,5 @@
 package com.example.kuyou.controller;
 
-/*
-* author dpc
-* */
-
-
 import com.example.kuyou.impl.ActivityHot;
 import com.example.kuyou.object.HotActivity;
 import org.springframework.beans.factory.annotation.Autowired;

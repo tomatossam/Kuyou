@@ -27,8 +27,13 @@ public class Video {
 
     private String english_name;
 
+    // 短视频的三个标签
+    private String label_1;
+    private String label_2;
+    private String label_3;
+
     // 保存国家
-    Object[] countries;
+    private Object[] countries;
 
     public long getV_id() {
         return v_id;
@@ -180,5 +185,29 @@ public class Video {
 
     public void setEnglish_name(String english_name) {
         this.english_name = english_name;
+    }
+
+    public String getLabel_1() {
+        return label_1;
+    }
+
+    public void setLabel_1(String label_1) {
+        this.label_1 = label_1;
+    }
+
+    public String getLabel_2() {
+        return label_2;
+    }
+
+    public void setLabel_2(String label_2) {
+        this.label_2 = label_2;
+    }
+
+    public String getLabel_3() {
+        return label_3;
+    }
+
+    public void setLabel_3(String label_3) {
+        this.label_3 = label_3;
     }
 }
