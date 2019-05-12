@@ -3,10 +3,55 @@
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.example.kuyou.dao.ActivityinfoDao">
 
-    <select id="getActitityfinfo" resultType="com.example.kuyou.entity.Activityinfo" parameterType="long">
-        select a_id,activity.l_id,a_indro,start_date,end_date,a_position,look_num,a_cover,u_id
-        from activity,label where activity.l_id=#{l_id} and activity.l_id=label.l_id
+    <!--获取普通活动信息-->
+    <select id="getActitityfinfo" resultType="map" parameterType="long">
+        SELECT a_indro as a_indro,look_num,a_cover,
+        (SELECT l_content from label where l_id=(SELECT l_id from activity where a_id=#{a_id})) as l_content
+        from activity WHERE a_id=#{a_id} and a_slogan is null
     </select>
+
+    <!--select id="getActitityfinfo2" resultType="map" parameterType="long">
+        SELECT a_user_indro as a_indro,look_num,a_cover,
+        (SELECT l_content from label where l_id=(SELECT l_id from activity where a_id=#{a_id})) as l_content
+        from activity WHERE a_id=#{a_id} and a_slogan is null
+    </select-->
+
+    <!--select id="getUserindro" parameterType="long" resultType="int">
+        select count(*) from activity where a_id=#{a_id} and a_user_indro is null
+    </select-->
+
+    <!--获取轮播图活动信息-->
+    <select id="getInfos" resultType="map" parameterType="long">
+        SELECT a_indro as a_indro,look_num,a_cover,
+        (SELECT l_content from label where l_id=(SELECT l_id from activity where a_id=#{a_id})) as l_content,a_slogan
+        from activity WHERE a_id=#{a_id} and a_slogan is not null
+    </select>
+
+    <!--select id="getInfos2" resultType="map" parameterType="long">
+        SELECT a_user_indro as a_indro,look_num,a_cover,
+        (SELECT l_content from label where l_id=(SELECT l_id from activity where a_id=#{a_id})) as l_content,a_slogan
+        from activity WHERE a_id=#{a_id} and a_slogan is not null
+    </select-->
+
+    <select id="getActivityVideos" resultType="String" parameterType="long">
+        SELECT v_content from video where v_id=any(SELECT v_id from join_label where l_id=(SELECT l_id from activity WHERE a_id=#{a_id}))
+    </select>
+
+    <select id="getActivityNum" resultType="int">
+        select count(*) from activity
+    </select>
+
+    <insert id="insertActivity1" parameterType="map">
+        insert into activity (l_id,a_indro,a_cover) values (#{l_id},(SELECT a_official_indro from pre_activity where l_id=#{l_id} limit 1),#{a_cover})
+    </insert>
+
+    <insert id="insertActivity2" parameterType="map">
+        insert into activity (l_id,a_indro,a_cover) values (#{l_id},#{a_user_indro},#{a_cover})
+    </insert>
+
+    <delete id="deletePreActivity" parameterType="long">
+        delete from pre_activity where l_id=#{l_id} limit 1
+    </delete>
 
 </mapper>
 

@@ -1,13 +1,27 @@
 server:
   tomcat:
     uri-encoding: UTF-8
-
 spring:
   http:
     encoding:
       charset: UTF-8
       force: true
       enabled: true
+
+  mail:
+    port: 25
+    protocol: smtp
+    host: smtp.qq.com
+    default-encoding: UTF-8
+    username: 853237267@qq.com
+    password: bsbseloyadedbfff
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
   datasource:
     name: mysql_test
     type: com.alibaba.druid.pool.DruidDataSource

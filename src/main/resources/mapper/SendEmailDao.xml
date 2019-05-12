@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.example.kuyou.dao.SendEmailDao">
+
+    <select id="checkEmail" parameterType="String" resultType="int">
+    select count(*) from user where email = #{email}
+    </select>
+
+    <!--当未使用的邮箱获取验证码时，数据库插入信息-->
+    <insert id="register" parameterType="map" >
+    insert into user (email,code_num) values (#{email}, #{checkCode})
+    </insert>
+
+    <!--邮箱已使用，则更新验证码-->
+    <update id="alterCodenum" parameterType="map">
+    update user set code_num=#{checkCode} where email=#{email}
+    </update>
+
+    <!--表示已注册成功，用户状态更新为1-->
+    <update id="register2" parameterType="map" >
+    update user set password=#{password},status=1 where email=#{email}
+    </update>
+
+    <!--根据激活码code查询用户-->
+    <select id="checkCode" parameterType="String" resultType="com.example.kuyou.entity.Email">
+    select * from user where code_num = #{code_num}
+  </select>
+
+    <select id="loginUser" parameterType="map" resultType="com.example.kuyou.entity.Email" >
+    select * from user where (u_id=#{email} or email=#{email}) and password=#{pwd} and status=1
+  </select>
+
+    <update id="alterInfo" parameterType="map" >
+    update user set nick=#{nick},sex=#{sex},signature=#{signature},age=#{age} where u_id=#{u_id}
+    </update>
+
+    <!--根据邮箱获取status-->
+    <select id="getStatus" parameterType="String" resultType="String">
+    select status from user where email = #{email}
+    </select>
+
+
+
+</mapper>

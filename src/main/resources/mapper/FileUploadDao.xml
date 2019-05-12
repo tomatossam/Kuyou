@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.example.kuyou.dao.FileUploadDao">
+
+    <select id="getViewid1" resultType="int" parameterType="map">
+        select view_id from view
+        where country=#{place1} and (province=#{place2} or city=#{place2} or place=#{place2} or position=#{place2})
+    </select>
+    <select id="getViewid2" resultType="int" parameterType="map">
+        select view_id from view
+        where country=#{place1} and ( (province=#{place2} and (city=#{place3} or place=#{place3} or position=#{place3}))  or
+        (city=#{place2} and (place=#{place3} or position=#{place3})) or
+        (place=#{place2} and position=#{place3}) )
+    </select>
+    <select id="getViewid3" resultType="int" parameterType="map">
+        select view_id from view
+        where country=#{place1} and ( (province=#{place2} and city=#{place3} and (place=#{place4} or position=#{place4})) or
+        (province=#{place2} and place=#{place3} and position=#{place4}) or
+        (city=#{place2} and (place=#{place3} and position=#{place4}) ) )
+    </select>
+    <select id="getViewid4" resultType="int" parameterType="map">
+        select view_id from view
+        where country=#{place1} and province=#{place2} and city=#{place3} and place=#{place4} and position=#{place5}
+    </select>
+
+    <select id="getLabelnum" resultType="int" parameterType="String">
+        select count(*) from label where l_content=#{l_content}
+    </select>
+
+    <insert id="insertLabel" parameterType="map" >
+    insert into label (l_content,u_id,l_kind,view_id) values (#{l_content}, #{u_id}, "USER" , #{view_id})
+    </insert>
+
+    <select id="getVideocount" resultType="int">
+        select count(*) from video
+    </select>
+
+    <insert id="insertVideoinfo" parameterType="map">
+    insert into video (v_content,v_creator,v_date,m_id,v_description,view_id,v_cover) values (#{v_content}, #{v_creator}, #{v_date},
+      #{m_id}, #{v_description}, #{view_id}, #{v_cover})
+    </insert>
+
+    <select id="getJoinlabelcount" parameterType="map" resultType="int">
+        select count(*) from join_label where l_id=(select l_id from label where l_content=#{l_content}) and
+        v_id=(select v_id from video where v_content=#{v_content})
+    </select>
+
+    <insert id="insertJoinlabel" parameterType="map">
+    insert into join_label (l_id,v_id) values ((select l_id from label where l_content=#{l_content}),(select v_id from video where v_content=#{v_content}))
+    </insert>
+
+    <select id="searchLabel" parameterType="String" resultType="com.example.kuyou.entity.Labelusenum">
+        select l_content,label_use_num from label where l_content like "%"#{labels}"%" order by label_use_num desc
+    </select>
+
+    <update id="alterBackcover" parameterType="map">
+        update user set bg_img=#{bg_img} where u_id=#{u_id}
+    </update>
+
+    <update id="alterHeadcover" parameterType="map">
+        update user set head=#{head} where u_id=#{u_id}
+    </update>
+</mapper>
