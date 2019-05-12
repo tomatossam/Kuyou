@@ -33,5 +33,11 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         configurer.favorPathExtension(false);
     }
 
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry){
+        registry.addResourceHandler("/kuyou/**").addResourceLocations("file:F:\\kuYou\\");
+    }
+
 }
 
