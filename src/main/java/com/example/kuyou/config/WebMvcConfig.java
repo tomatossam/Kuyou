@@ -40,4 +40,3 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     }
 
 }
-
