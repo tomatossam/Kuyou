@@ -18,7 +18,7 @@ public class ActivityHot {
     private static final String SELECT_HOT_ACTIVITY =
             "select a_id, look_num, activity.l_id, l_content, u_id " +
                     "from activity, label " +
-                    "where activity.l_id = label.l_id and l_kind = \"ACTIVITY\" " +
+                    "where activity.l_id = label.l_id and l_kind = \"ACTIVITY\" and a_slogan is null " +
                     "order by look_num desc;";
 
     @Autowired

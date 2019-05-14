@@ -9,4 +9,6 @@ public interface MusicinfoService {
 
     public List<Musicinfo> getMusicinfomation(long u_id, String m_kind);
 
+    public Map<String, Object> getMusicdetails(long m_id,long u_id);
+
 }

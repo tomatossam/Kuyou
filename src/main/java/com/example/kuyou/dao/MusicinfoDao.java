@@ -11,5 +11,6 @@ public interface MusicinfoDao {
 
     public List<Musicinfo> getTypeMusic(Map<String,Object> group);
 
+    public Map<String,Object> getMusicdetails(Map<String,Object> group);
 
 }

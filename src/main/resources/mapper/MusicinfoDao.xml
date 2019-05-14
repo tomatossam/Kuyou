@@ -13,5 +13,11 @@
         from music where m_kind=#{m_kind} order by user_num desc
     </select>
 
+    <select id="getMusicdetails" resultType="map" parameterType="map">
+         SELECT m_title,m_cover,m_content,user_num, (SELECT count(*) from music_collect where u_id=#{u_id} and music_collect.m_id=music.m_id)as iscollected
+        from music where m_id=#{m_id}
+    </select>
+
+
 
 </mapper>

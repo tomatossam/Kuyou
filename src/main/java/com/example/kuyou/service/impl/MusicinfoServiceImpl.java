@@ -28,4 +28,11 @@ public class MusicinfoServiceImpl implements MusicinfoService {
             return null;
     }
 
+    public Map<String, Object> getMusicdetails(long m_id,long u_id) {
+        Map<String,Object> group=new HashMap<String, Object>();
+        group.put("m_id",m_id);
+        group.put("u_id",u_id);
+        return musicinfoDao.getMusicdetails(group);
+    }
+
 }
