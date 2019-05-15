@@ -109,14 +109,14 @@
 
     <!--获取粉丝列表-->
     <select id="getFanslist" parameterType="map" resultType="User">
-    select A.nick,A.head,A.signature,(select count(*) from fans WHERE following_id=#{u_id} and fans.u_id=A.u_id) as isfollowed from
+    select A.u_id,A.nick,A.head,A.signature,(select count(*) from fans WHERE following_id=#{u_id} and fans.u_id=A.u_id) as isfollowed from
     (select nick ,head ,signature ,u_id
     from user where u_id=any(select u_id from fans where following_id=#{target_id}))A
     </select>
 
     <!--获取关注列表-->
     <select id="getFollowslist" parameterType="map" resultType="User">
-    select A.nick,A.head,A.signature,(select count(*) from fans WHERE following_id=#{u_id} and fans.u_id=A.u_id) as isfollowed from
+    select A.u_id,A.nick,A.head,A.signature,(select count(*) from fans WHERE following_id=#{u_id} and fans.u_id=A.u_id) as isfollowed from
     (select nick ,head ,signature ,u_id
     from user where u_id=any(select following_id from fans where u_id=#{target_id}))A
     </select>
