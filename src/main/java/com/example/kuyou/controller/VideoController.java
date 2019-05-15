@@ -1,9 +1,5 @@
 package com.example.kuyou.controller;
 
-/*
- * author 杜鹏程
- * */
-
 import com.example.kuyou.function.VideoInfo;
 import com.example.kuyou.impl.*;
 import com.example.kuyou.object.Video;
@@ -16,7 +12,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
 
 @CrossOrigin
 @RestController
