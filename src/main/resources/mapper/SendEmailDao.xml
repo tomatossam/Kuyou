@@ -32,7 +32,7 @@
   </select>
 
     <update id="alterInfo" parameterType="map" >
-    update user set nick=#{nick},sex=#{sex},signature=#{signature},age=#{age} where u_id=#{u_id}
+    update user set nick=#{nick},sex=#{sex},signature=#{signature},age=#{age},city=#{city} where u_id=#{u_id}
     </update>
 
     <!--根据邮箱获取status-->

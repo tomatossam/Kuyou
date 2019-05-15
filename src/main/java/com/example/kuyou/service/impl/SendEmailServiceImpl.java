@@ -111,7 +111,7 @@ public class SendEmailServiceImpl implements SendEmailService {
 
     }
 
-    public String alterInfo(int u_id, String nick,String sex, String signature, int age)
+    public String alterInfo(int u_id, String nick,String sex, String signature, int age, String city)
     {
 
         Map<String,Object> group=new HashMap<String, Object>();
@@ -120,6 +120,7 @@ public class SendEmailServiceImpl implements SendEmailService {
         group.put("sex",sex);
         group.put("signature",signature);
         group.put("age",age);
+        group.put("city",city);
         sendEmailDao.alterInfo(group);
         return "1";
     }
