@@ -4,12 +4,12 @@
 <mapper namespace="com.example.kuyou.dao.MusicinfoDao">
 
     <select id="getCollectedMusic" resultType="com.example.kuyou.entity.Musicinfo" parameterType="long">
-        SELECT (SELECT nick from user where u_id=m_creator)as nick,m_title,m_cover,m_content, 1 as iscollected
+        SELECT m_id,(SELECT nick from user where u_id=m_creator)as nick,m_title,m_cover,m_content, 1 as iscollected
         from music where m_id=any(SELECT m_id from music_collect where u_id=#{u_id}) order by user_num desc
     </select>
 
     <select id="getTypeMusic" resultType="com.example.kuyou.entity.Musicinfo" parameterType="map">
-         SELECT (SELECT nick from user where u_id=m_creator)as nick,m_title,m_cover,m_content, (SELECT count(*) from music_collect where u_id=#{u_id} and music_collect.m_id=music.m_id)as iscollected
+         SELECT m_id,(SELECT nick from user where u_id=m_creator)as nick,m_title,m_cover,m_content, (SELECT count(*) from music_collect where u_id=#{u_id} and music_collect.m_id=music.m_id)as iscollected
         from music where m_kind=#{m_kind} order by user_num desc
     </select>
 

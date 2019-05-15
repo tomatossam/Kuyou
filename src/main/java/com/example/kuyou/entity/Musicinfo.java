@@ -2,11 +2,16 @@ package com.example.kuyou.entity;
 
 public class Musicinfo {
 
+    private long m_id;
     private String nick;
     private String m_title;
     private String m_cover;
     private String m_content;
     private long isCollected;
+
+    public long getM_id() { return m_id; }
+
+    public void setM_id(long m_id) { this.m_id = m_id; }
 
     public String getNick() {
         return nick;
