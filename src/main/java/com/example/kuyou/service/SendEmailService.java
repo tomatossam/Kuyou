@@ -14,7 +14,7 @@ public interface SendEmailService {
 
     public String userAlterpwd(String email,String code_num,String pwd);
 
-    public String alterInfo(int u_id, String nick,String sex, String signature, int age, String city);
+    public String alterInfo(long u_id, String nick,String sex, String signature, int age, String city);
 
 
 }

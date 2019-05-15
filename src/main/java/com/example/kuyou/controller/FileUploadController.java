@@ -68,7 +68,7 @@ public class FileUploadController {
 
     //短视频上传
     @RequestMapping(value = "camera/upload",method = RequestMethod.POST)
-    public String uploadVideo(@RequestParam int v_creator, @RequestParam String position,@RequestParam  int m_id,
+    public String uploadVideo(@RequestParam long v_creator, @RequestParam String position,@RequestParam  int m_id,
                               @RequestParam  String label,@RequestParam String v_description,@RequestParam("fileName") MultipartFile file){
 
         if (file.isEmpty()) { return "上传文件不可为空"; }
@@ -114,7 +114,7 @@ public class FileUploadController {
 
     //图片上传
     @RequestMapping(value = "cover/upload",method = RequestMethod.POST)
-    public String uploadCover(@RequestParam int u_id,@RequestParam String cover_kind,@RequestParam("fileName") MultipartFile file) {
+    public String uploadCover(@RequestParam long u_id,@RequestParam String cover_kind,@RequestParam("fileName") MultipartFile file) {
         if (file.isEmpty()) { return "上传文件不可为空"; }
         //获取文件名
         String fileName = String.valueOf(u_id)+".png";

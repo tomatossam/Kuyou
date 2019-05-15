@@ -111,7 +111,7 @@ public class SendEmailServiceImpl implements SendEmailService {
 
     }
 
-    public String alterInfo(int u_id, String nick,String sex, String signature, int age, String city)
+    public String alterInfo(long u_id, String nick,String sex, String signature, int age, String city)
     {
 
         Map<String,Object> group=new HashMap<String, Object>();

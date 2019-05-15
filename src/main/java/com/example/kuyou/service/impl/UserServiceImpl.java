@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public int postTravelstate(String position,int u_id) {
+    public int postTravelstate(String position,long u_id) {
         String str[]=position.split("·");
         Map<String,Object> group=new HashMap<String, Object>();
         if(str.length==2) {

@@ -31,7 +31,7 @@ public class SendEmailController {
 
     //修改个人资料
     @RequestMapping(value = "user/alterinfo",method = RequestMethod.POST,produces= "application/json;charset=UTF-8")
-    public String alterinfo(@RequestParam int u_id,@RequestParam String nick,@RequestParam String sex,@RequestParam String signature,@RequestParam int age,@RequestParam String city)
+    public String alterinfo(@RequestParam long u_id,@RequestParam String nick,@RequestParam String sex,@RequestParam String signature,@RequestParam int age,@RequestParam String city)
     {return sendEmailService.alterInfo(u_id,nick,sex,signature,age,city);}
 
 

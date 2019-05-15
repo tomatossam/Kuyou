@@ -16,7 +16,7 @@ public class UserController {
 
     //接口4
     @RequestMapping(value = "/user/home",method = RequestMethod.GET,produces={"application/json;charset=utf-8"})
-    public Map<String, Object> getOtherinf(@RequestParam int u_id) { return userService.getOtherinfo(u_id);}
+    public Map<String, Object> getOtherinf(@RequestParam long u_id) { return userService.getOtherinfo(u_id);}
 
     //接口5
     @RequestMapping(value = "/user/resource",method = RequestMethod.POST)
@@ -27,7 +27,7 @@ public class UserController {
 
     //接口6
     @RequestMapping(value = "/user/travel_stat",method = RequestMethod.POST)
-    public int postTravelstate(@RequestParam String position,@RequestParam int u_id){return userService.postTravelstate(position,u_id);}
+    public int postTravelstate(@RequestParam String position,@RequestParam long u_id){return userService.postTravelstate(position,u_id);}
 
     //获取粉丝列表
     @RequestMapping(value = "/user/fanslist",method = RequestMethod.GET)
