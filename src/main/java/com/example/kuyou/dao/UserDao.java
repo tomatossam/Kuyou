@@ -3,6 +3,7 @@ package com.example.kuyou.dao;
 import com.example.kuyou.entity.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 public interface UserDao {
@@ -41,4 +42,8 @@ public interface UserDao {
     public void changeTravelstate(long id);
     public void cancelTravelstate(long id);
 
+    //获取粉丝列表
+    public List<User> getFanslist(Map<String,Object> group);
+    //获取关注列表
+    public List<User> getFollowslist(Map<String,Object> group);
 }

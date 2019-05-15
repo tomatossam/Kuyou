@@ -100,7 +100,6 @@
         where country=#{place1} and province=#{place2} and city=#{place3} and place=#{place4} and position=#{place5}
     </select>
 
-
     <update id="changeTravelstate" parameterType="long">
         update user set travel_stat='Y' where u_id=#{u_id}
     </update>
@@ -108,5 +107,17 @@
         update user set travel_stat='N' where u_id=#{u_id}
     </update>
 
+    <!--获取粉丝列表-->
+    <select id="getFanslist" parameterType="map" resultType="User">
+    select A.nick,A.head,A.signature,(select count(*) from fans WHERE following_id=#{u_id} and fans.u_id=A.u_id) as isfollowed from
+    (select nick ,head ,signature ,u_id
+    from user where u_id=any(select u_id from fans where following_id=#{target_id}))A
+    </select>
 
+    <!--获取关注列表-->
+    <select id="getFollowslist" parameterType="map" resultType="User">
+    select A.nick,A.head,A.signature,(select count(*) from fans WHERE following_id=#{u_id} and fans.u_id=A.u_id) as isfollowed from
+    (select nick ,head ,signature ,u_id
+    from user where u_id=any(select following_id from fans where u_id=#{target_id}))A
+    </select>
 </mapper>

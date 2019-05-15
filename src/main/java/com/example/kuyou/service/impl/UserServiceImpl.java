@@ -126,4 +126,14 @@ public class UserServiceImpl implements UserService {
         return 1;
     }
 
+    public List<User> getFanslist(long u_id,long target_id){
+        Map<String,Object> group=new HashMap<String,Object>();
+        group.put("u_id",u_id);group.put("target_id",target_id);
+        return userDao.getFanslist(group); }
+
+    public List<User> getFollowslist(long u_id,long target_id){
+        Map<String,Object> group=new HashMap<String,Object>();
+        group.put("u_id",u_id);group.put("target_id",target_id);
+        return userDao.getFollowslist(group);}
+
 }
