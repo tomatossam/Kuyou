@@ -55,7 +55,7 @@
 
 <!--用户关注-->
     <insert id="noticeUser" parameterType="map">
-        insert into fans(u_id,following_id,f_date,f_time) values(#{u_id}, #{resource_id}, #{timeA}, #{timeB})
+        insert into fans(u_id,following_id,f_date,f_time) values(#{resource_id}, #{u_id}, #{timeA}, #{timeB})
     </insert>
 
     <update id="addFollowingnum" parameterType="long">
@@ -67,7 +67,7 @@
     </update>
 
     <delete id="disnoticeUser" parameterType="map">
-        delete from fans where (u_id=#{u_id} and following_id=#{resource_id})
+        delete from fans where (u_id=#{resource_id} and following_id=#{u_id})
     </delete>
 
     <update id="delFollowingnum" parameterType="long">
@@ -111,13 +111,13 @@
     <select id="getFanslist" parameterType="map" resultType="User">
     select A.u_id,A.nick,A.head,A.signature,(select count(*) from fans WHERE following_id=#{u_id} and fans.u_id=A.u_id) as isfollowed from
     (select nick ,head ,signature ,u_id
-    from user where u_id=any(select u_id from fans where following_id=#{target_id}))A
+    from user where u_id=any(select following_id from fans where u_id=#{target_id}))A
     </select>
 
     <!--获取关注列表-->
     <select id="getFollowslist" parameterType="map" resultType="User">
-    select A.u_id,A.nick,A.head,A.signature,(select count(*) from fans WHERE following_id=#{u_id} and fans.u_id=A.u_id) as isfollowed from
+    select A.u_id,A.nick,A.head,A.signature,(select count(*) from fans WHERE fans.u_id=#{u_id} and fans.following_id=A.u_id) as isfollowed from
     (select nick ,head ,signature ,u_id
-    from user where u_id=any(select following_id from fans where u_id=#{target_id}))A
+    from user where u_id=any(select u_id from fans where following_id=#{target_id}))A
     </select>
 </mapper>
