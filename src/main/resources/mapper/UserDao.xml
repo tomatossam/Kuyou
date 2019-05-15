@@ -4,7 +4,7 @@
 <mapper namespace="com.example.kuyou.dao.UserDao">
 
     <select id="getOtherinfo" resultType="map" parameterType="long">
-        select bg_img,signature,age,sex,city,school,thumb_num,following_num,fans_num,works_num,
+        select nick,bg_img,signature,age,sex,city,school,thumb_num,following_num,fans_num,works_num,
         like_num,country_num,city_num,place_num,activity_num
         from user where u_id=#{id}
     </select>
