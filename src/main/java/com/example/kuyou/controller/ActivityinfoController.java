@@ -1,5 +1,6 @@
 package com.example.kuyou.controller;
 
+import com.example.kuyou.entity.Activitysp;
 import com.example.kuyou.service.ActivityinfoService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,6 +34,7 @@ public class ActivityinfoController {
     public List<String> getActivityVideo(@RequestParam long a_id)
     {return activityinfoService.getActivityVideo(a_id);}
 
+    //活动注册
     @RequestMapping(value = "activity/register",method = RequestMethod.POST)
     public String activityRegister(@RequestParam long l_id,@RequestParam String a_user_indro,@RequestParam("fileName") MultipartFile file) {
         if (file.isEmpty()) { return "上传文件不可为空"; }
@@ -65,4 +67,7 @@ public class ActivityinfoController {
         return "1";
     }
 
+    //获取特殊活动列表
+    @RequestMapping(value = "activity/banner",method = RequestMethod.GET)
+    public List<Activitysp> getActivitysplist(){return activityinfoService.getActivitysplist();}
 }

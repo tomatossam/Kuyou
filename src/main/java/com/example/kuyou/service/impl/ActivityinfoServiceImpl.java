@@ -1,6 +1,7 @@
 package com.example.kuyou.service.impl;
 
 import com.example.kuyou.dao.ActivityinfoDao;
+import com.example.kuyou.entity.Activitysp;
 import com.example.kuyou.service.ActivityinfoService;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,6 @@ public class ActivityinfoServiceImpl implements ActivityinfoService {
 
     public void deletePreActivity(long l_id){activityinfoDao.deletePreActivity(l_id);}
 
+    public List<Activitysp> getActivitysplist(){return activityinfoDao.getActivitysplist();}
 
 }

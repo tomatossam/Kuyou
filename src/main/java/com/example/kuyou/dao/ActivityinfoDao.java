@@ -1,6 +1,8 @@
 package com.example.kuyou.dao;
 
 
+import com.example.kuyou.entity.Activitysp;
+
 import java.util.List;
 import java.util.Map;
 
@@ -19,5 +21,7 @@ public interface ActivityinfoDao {
     public void insertActivity2(Map<String, Object> group);
 
     public void deletePreActivity(long l_id);
+
+    public List<Activitysp> getActivitysplist();
 
 }
