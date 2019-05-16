@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface UserDao {
     //获取用户其他信息
-    public Map<String, Object> getOtherinfo(long id);
+    public Map<String, Object> getOtherinfo(Map<String,Object> group);
 
     //音乐收藏
     public void collectMusic(Map<String,Object> group);
@@ -46,4 +46,8 @@ public interface UserDao {
     public List<User> getFanslist(Map<String,Object> group);
     //获取关注列表
     public List<User> getFollowslist(Map<String,Object> group);
+
+    //判断关注状态
+    public int getFanState1(Map<String,Object> group);
+    public int getFanState2(Map<String,Object> group);
 }

@@ -3,10 +3,10 @@
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.example.kuyou.dao.UserDao">
 
-    <select id="getOtherinfo" resultType="map" parameterType="long">
+    <select id="getOtherinfo" resultType="map" parameterType="map">
         select nick,bg_img,signature,age,sex,city,school,thumb_num,following_num,fans_num,works_num,
-        like_num,country_num,city_num,place_num,activity_num
-        from user where u_id=#{id}
+        like_num,country_num,city_num,place_num,activity_num,#{notice_kind} as notice_kind
+        from user where u_id=#{target_id}
     </select>
 
 <!-- 音乐收藏-->
@@ -120,4 +120,13 @@
     (select nick ,head ,signature ,u_id
     from user where u_id=any(select u_id from fans where following_id=#{target_id}))A
     </select>
+
+    <!--判断关注状态-->
+    <select id="getFanState1" parameterType="map" resultType="int">
+        select count(*) from fans where following_id=#{u_id} and u_id=#{target_id}
+    </select>
+    <select id="getFanState2" parameterType="map" resultType="int">
+        select count(*) from fans where following_id=#{target_id} and u_id=#{u_id}
+    </select>
+
 </mapper>

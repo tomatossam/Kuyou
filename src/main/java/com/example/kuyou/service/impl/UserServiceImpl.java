@@ -15,7 +15,16 @@ public class UserServiceImpl implements UserService {
     @Resource
     UserDao userDao;
 
-    public Map<String, Object> getOtherinfo(long id){return userDao.getOtherinfo(id);}
+    public Map<String, Object> getOtherinfo(long u_id,long target_id){
+        Map<String,Object> group=new HashMap<String,Object>();
+        group.put("u_id",u_id);group.put("target_id",target_id);
+        String notice_kind="0";
+        if(userDao.getFanState1(group)==1 && userDao.getFanState2(group)==0)  notice_kind="NOTICE_YES";
+        if(userDao.getFanState1(group)==0) notice_kind="NOTICE_NO";
+        if(userDao.getFanState1(group)==1 && userDao.getFanState2(group)==1)  notice_kind="NOTICE_TWO";
+        Map<String,Object> group2=new HashMap<String,Object>();
+        group2.put("target_id",target_id);group2.put("notice_kind",notice_kind);
+        return userDao.getOtherinfo(group2);}
 
     public int resourceRequest(String resource_post_kind,long resource_id,long u_id ) {
         Map<String,Object> group=new HashMap<String, Object>();

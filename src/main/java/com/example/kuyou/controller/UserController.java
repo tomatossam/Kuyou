@@ -16,7 +16,7 @@ public class UserController {
 
     //接口4
     @RequestMapping(value = "/user/home",method = RequestMethod.GET,produces={"application/json;charset=utf-8"})
-    public Map<String, Object> getOtherinf(@RequestParam long u_id) { return userService.getOtherinfo(u_id);}
+    public Map<String, Object> getOtherinf(@RequestParam long u_id,@RequestParam long target_id) { return userService.getOtherinfo(u_id,target_id);}
 
     //接口5
     @RequestMapping(value = "/user/resource",method = RequestMethod.POST)
