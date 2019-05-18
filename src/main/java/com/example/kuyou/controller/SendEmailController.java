@@ -5,6 +5,7 @@ import com.example.kuyou.service.SendEmailService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 @RestController
 public class SendEmailController {
@@ -14,15 +15,15 @@ public class SendEmailController {
 
     //获取邮箱验证码
     @RequestMapping(value = "user/getcode",method = RequestMethod.GET)
-    public String getCode(@RequestParam String email){return sendEmailService.sendSimpleMail(email);}
+    public Map<String, Object> getCode(@RequestParam String email){return sendEmailService.sendSimpleMail(email);}
 
     //注册
     @RequestMapping(value = "user/register",method = RequestMethod.POST,produces= "application/json;charset=UTF-8")
-    public String userRegister(@RequestParam String email, @RequestParam String code_num, @RequestParam String password){return sendEmailService.userRegister(email,code_num,password);}
+    public Map<String, Object> userRegister(@RequestParam String email, @RequestParam String code_num, @RequestParam String password){return sendEmailService.userRegister(email,code_num,password);}
 
     //登录
     @RequestMapping(value = "user/login",method = RequestMethod.POST,produces= "application/json;charset=UTF-8")
-    public String userLogin(@RequestParam String email, @RequestParam String password)
+    public Map<String,Object> userLogin(@RequestParam String email, @RequestParam String password)
     {return sendEmailService.userLogin(email,password);}
 
     //修改密码

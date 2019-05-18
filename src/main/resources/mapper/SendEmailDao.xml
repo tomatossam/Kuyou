@@ -40,6 +40,9 @@
     select status from user where email = #{email}
     </select>
 
+    <select id="getUserid" parameterType="String" resultType="long">
+    select u_id from user where email=#{email}
+    </select>
 
 
 </mapper>

@@ -22,5 +22,7 @@ public interface SendEmailDao {
 
     public String getStatus(String email);
 
+    public long getUserid(String email);
+
 
 }

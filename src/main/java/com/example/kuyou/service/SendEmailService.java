@@ -6,11 +6,11 @@ import java.util.Map;
 
 public interface SendEmailService {
 
-    public String sendSimpleMail(String email);
+    public Map<String,Object> sendSimpleMail(String email);
 
-    public String userRegister(String email,String code_num,String password);
+    public Map<String, Object> userRegister(String email,String code_num,String password);
 
-    public String userLogin(String email,String pwd);
+    public Map<String,Object> userLogin(String email,String pwd);
 
     public String userAlterpwd(String email,String code_num,String pwd);
 
