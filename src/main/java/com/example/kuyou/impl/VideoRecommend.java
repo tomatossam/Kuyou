@@ -10,7 +10,9 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 @ComponentScan
@@ -40,6 +42,7 @@ public class VideoRecommend implements VideoInfo {
     public List<Video> getVideoInfo(long id) {
         RowMapper<Video> rowMapper = new BeanPropertyRowMapper<>(Video.class);
 
+
         List<Video> videoList = jdbcOperations.query(SELECT_VIDEO_MUSIC,rowMapper, new Object[]{id});
 
         RowMapper<VideoLabel> rowMapper1 = new BeanPropertyRowMapper<>(VideoLabel.class);
@@ -56,7 +59,14 @@ public class VideoRecommend implements VideoInfo {
                 video.setLabel_3(videoLabelList.get(2).getL_content());
             }
         }
+        Set<Video> videoSet = new HashSet<>();
+        for(Video video : videoList){
+            videoSet.add(video);
+        }
+        videoList.clear();
+        for (Video video : videoSet){
+            videoList.add(video);
+        }
         return videoList;
     }
-
 }

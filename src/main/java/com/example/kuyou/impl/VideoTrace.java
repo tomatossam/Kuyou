@@ -41,10 +41,7 @@ public class VideoTrace implements VideoInfo {
                 new Object[]{id});
         Set<String> countrySet = new HashSet<>();
         for(Video video:videoList){
-            String urlCountry =
-                    "http://192.168.43.95:8080/media/get" +
-                            "?media_request_kind=COUNTRY&media_content=" + video.getCountry();
-            countrySet.add(urlCountry);
+            countrySet.add(video.getCountry());
         }
         Object[] countries = countrySet.toArray();
         videoList.get(0).setCountries(countries);

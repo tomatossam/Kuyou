@@ -35,8 +35,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry){
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/kuyou/**").addResourceLocations("file:F:\\kuYou\\");
     }
-
 }
