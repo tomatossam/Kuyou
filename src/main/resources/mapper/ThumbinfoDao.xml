@@ -4,12 +4,13 @@
 <mapper namespace="com.example.kuyou.dao.ThumbinfoDao">
 
     <select id="getThumbinfo" resultType="com.example.kuyou.entity.Thumbinfo" parameterType="long">
-        select v_id,u_id,vt_time,vt_date,'THUMB_VIDEO' as thumb_kind
-        from video_thumb where u_id=#{u_id}
-        union all
-        select vc_id,u_id,c_thumb_time,c_thumb_date,'THUMB_COMMON' as thumb_kind
-        from common_thumb where u_id=#{u_id}
-        ORDER BY vt_date DESC,vt_time DESC
+    SELECT * from(select A.v_id,A.u_id,(SELECT nick from user where user.u_id=A.u_id) as nick ,A.vt_time,A.vt_date,'THUMB_VIDEO' as thumb_kind from
+     ( select v_id,u_id,vt_time,vt_date  from video_thumb where v_id=any(SELECT v_id from video WHERE v_creator=#{u_id}))A
+    ORDER BY A.vt_date DESC,A.vt_time DESC)C
+    union all
+    SELECT * from (select B.vc_id,B.u_id,(SELECT nick from user where user.u_id=B.u_id) as nick,B.c_thumb_time,B.c_thumb_date,'THUMB_COMMON' as thumb_kind from
+    (select vc_id,u_id,c_thumb_time,c_thumb_date from common_thumb where vc_id=any(SELECT vc_id from video_common where u_id=#{u_id}))B
+    ORDER BY B.c_thumb_date ,B.c_thumb_time DESC)D
     </select>
 
 </mapper>

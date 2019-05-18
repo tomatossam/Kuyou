@@ -4,9 +4,14 @@ public class Thumbinfo {
 
     private long v_id;
     private long u_id;
+    private String nick;
     private String vt_time;
     private String vt_date;
     private String thumb_kind;
+
+    public String getNick() { return nick; }
+
+    public void setNick(String nick) { this.nick = nick; }
 
     public String getThumb_kind() {
         return thumb_kind;

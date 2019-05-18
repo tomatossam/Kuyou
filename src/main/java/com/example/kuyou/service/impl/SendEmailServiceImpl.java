@@ -142,7 +142,7 @@ public class SendEmailServiceImpl implements SendEmailService {
                     return "3";     //邮箱未注册
                 else {
                     Map<String,Object> group=new HashMap<String, Object>();
-                    group.put("code_num",code_num);
+                    group.put("email",email);
                     group.put("password",password);
                     sendEmailDao.register2(group);
                     return "1"; //密码修改成功
