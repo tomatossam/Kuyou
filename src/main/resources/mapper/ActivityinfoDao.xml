@@ -54,7 +54,8 @@
     </delete>
 
     <select id="getActivitysplist" resultType="com.example.kuyou.entity.Activitysp">
-        select a_id,a_cover,a_slogan from activity where a_slogan is not null
+        select A.a_id,A.a_cover,A.a_slogan,A.l_id,(select l_content from label where label.l_id=A.l_id) as l_content from
+        (select a_id,a_cover,a_slogan,l_id from activity where a_slogan is not null)A
     </select>
 </mapper>
 
