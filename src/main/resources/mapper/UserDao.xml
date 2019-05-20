@@ -27,7 +27,7 @@
 
 <!--视频点赞-->
     <insert id="thumbVideo" parameterType="map">
-        insert into video_thumb(u_id,v_id,vt_time,vt_date) values(#{u_id}, #{resource_id}, #{timeA}, #{timeB})
+        insert into video_thumb(u_id,v_id,vt_date,vt_time) values(#{u_id}, #{resource_id}, #{timeA}, #{timeB})
     </insert>
     <update id="addthumbVideo" parameterType="long">
         update video set v_thumb_num=v_thumb_num+1 where v_id=#{resource_id}
