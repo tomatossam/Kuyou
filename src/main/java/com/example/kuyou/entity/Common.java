@@ -4,9 +4,14 @@ public class Common {
     private long vc_id;
     private String vc_content;
     private long u_id;
+    private String nick;
     private String vc_time;
     private String vc_date;
     private long vc_thumb_num;
+
+    public String getNick() { return nick; }
+
+    public void setNick(String nick) { this.nick = nick; }
 
     public long getVc_id() {
         return vc_id;

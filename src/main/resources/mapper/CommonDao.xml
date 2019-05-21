@@ -4,8 +4,9 @@
 <mapper namespace="com.example.kuyou.dao.CommonDao">
 
     <select id="getCommons" resultType="com.example.kuyou.entity.Common" parameterType="long">
-        select vc_id,vc_content,u_id,vc_time,vc_date,vc_thumb_num
-        from video_common where v_id=#{v_id}
+        select A.vc_id,A.vc_content,A.u_id,(select nick from user where user.u_id=A.u_id) as nick, A.vc_time,A.vc_date,A.vc_thumb_num
+        from (select vc_id,vc_content,u_id,vc_time,vc_date,vc_thumb_num
+        from video_common where v_id=#{v_id})A
     </select>
 
     <insert id="postCommons" parameterType="com.example.kuyou.entity.Common">
