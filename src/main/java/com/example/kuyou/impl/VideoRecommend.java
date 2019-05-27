@@ -28,7 +28,21 @@ public class VideoRecommend implements VideoInfo {
                     "from video, view, music, fans " +
                     "where fans.following_id = ? and video.v_creator = fans.u_id " +
                     "and view.view_id = video.view_id " +
-                    "and music.m_id = video.m_id ;";
+                    "and music.m_id = video.m_id " +
+                    "and v_thumb_num >= 10000;";
+
+    // 推荐热度视频
+    private static final String SELECT_PTHER_HOT_VIDEO =
+            "select v_id, v_cover, v_content, v_creator, v_date, " +
+                    "video.m_id, v_description, v_thumb_num, " +
+                    "share_num, common_num, video.view_id, country, " +
+                    "province, city, place, position, m_title " +
+                    "from video, view, music, fans " +
+                    "where fans.following_id <> ? and video.v_creator = fans.u_id " +
+                    "and view.view_id = video.view_id " +
+                    "and music.m_id = video.m_id " +
+                    "and v_thumb_num >= 20000 " +
+                    "and v_creator <> ?;";
 
     private static final String SELECT_VIDEO_LABELS = "select l_content from label, join_label " +
             "where join_label.v_id = ? and join_label.l_id = label.l_id;";
@@ -42,8 +56,11 @@ public class VideoRecommend implements VideoInfo {
     public List<Video> getVideoInfo(long id) {
         RowMapper<Video> rowMapper = new BeanPropertyRowMapper<>(Video.class);
 
-
         List<Video> videoList = jdbcOperations.query(SELECT_VIDEO_MUSIC,rowMapper, new Object[]{id});
+        List<Video> videoList1 = jdbcOperations.query(SELECT_PTHER_HOT_VIDEO, rowMapper, new Object[]{id, id});
+        for (Video video : videoList1){
+            videoList.add(video);
+        }
 
         RowMapper<VideoLabel> rowMapper1 = new BeanPropertyRowMapper<>(VideoLabel.class);
         for (Video video : videoList) {
