@@ -61,4 +61,16 @@
     <update id="alterHeadcover" parameterType="map">
         update user set head=#{head} where u_id=#{u_id}
     </update>
+
+    <select id="getVideoinfo" parameterType="map" resultType="map">
+        select v_id,v_cover,v_content,v_creator,v_date,m_id,v_description,v_thumb_num,share_num,common_num,view_id,
+        (select country from view where view_id=#{view_id}) as country,
+        (select province from view where view_id=#{view_id}) as province,
+        (select city from view where view_id=#{view_id}) as city,
+        (select place from view where view_id=#{view_id}) as place,
+        (select position from view where view_id=#{view_id}) as position,
+        (select m_title from music where m_id=#{m_id}) as m_title,
+        #{label_1,jdbcType=VARCHAR} as label_1,#{label_2,jdbcType=VARCHAR} as label_2, #{label_3,jdbcType=VARCHAR} as label_3, 1 as result
+        from video where v_id=#{v_id}
+    </select>
 </mapper>

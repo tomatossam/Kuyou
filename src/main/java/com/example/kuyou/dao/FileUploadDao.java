@@ -25,4 +25,6 @@ public interface FileUploadDao {
 
     public void alterBackcover(Map<String,Object> group);
     public void alterHeadcover(Map<String,Object> group);
+
+    public Map<String,Object> getVideoinfo(Map<String,Object> group);
 }

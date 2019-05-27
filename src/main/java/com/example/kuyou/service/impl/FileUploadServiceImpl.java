@@ -21,32 +21,35 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Resource
     UserDao userDao;
 
+    long v_id;
     //用于更新label表，video表，join-label表
-    public String uploadVideo(long v_creator,String position,int m_id,String label,String v_description,String v_date,String v_content,String v_cover){
+    public Map<String, Object> uploadVideo(long v_creator,String position,int m_id,String label,String v_description,String v_date,String v_content,String v_cover){
 
         //旅行地址解析
         String str[]=position.split("·");
         Map<String,Object> group=new HashMap<String, Object>();
+        Map<String,Object> group5=new HashMap<String, Object>();
+        group5.put("result",0);
         int view_id=0;
         if(str.length==2) {
             group.put("place1",str[0]);group.put("place2",str[1]);
             if(userDao.travelState1(group)!=0) { view_id=fileUploadDao.getViewid1(group);} //获取景点ID
-            else return "0";//判断不在景点中
+            else return group5;//判断不在景点中
         }
         if(str.length==3){
             group.put("place1",str[0]);group.put("place2",str[1]);group.put("place3",str[2]);
             if(userDao.travelState2(group)!=0) { view_id=fileUploadDao.getViewid2(group); }
-            else return "0";
+            else return group5;
         }
         if(str.length==4){
             group.put("place1",str[0]);group.put("place2",str[1]);group.put("place3",str[2]);group.put("place4",str[3]);
             if(userDao.travelState3(group)!=0) { view_id=fileUploadDao.getViewid3(group); }
-            else return "0";
+            else return group5;
         }
         if(str.length==5){
             group.put("place1",str[0]);group.put("place2",str[1]);group.put("place3",str[2]);group.put("place4",str[3]);group.put("place5",str[4]);
             if(userDao.travelState4(group)!=0) { view_id=fileUploadDao.getViewid4(group); }
-            else return "0";
+            else return group5;
         }
 
         //标签解析，更新label表
@@ -75,7 +78,16 @@ public class FileUploadServiceImpl implements FileUploadService {
             if(joinlable[i]==0){fileUploadDao.insertJoinlabel(group3);}
         }
 
-       return "1";
+        //获取返回参数列表
+        v_id=fileUploadDao.getVideocount();
+        Map<String, Object> group4 = new HashMap<String, Object>();
+        group4.put("v_id",v_id);group4.put("view_id",view_id);group4.put("m_id",m_id);
+        if(len==1||len==0){group4.put("label_1","null");group4.put("label_2","null");group4.put("label_3","null");}
+        else if(len==2){group4.put("label_1",STR[1]);group4.put("label_2","null");group4.put("label_3","null");}
+        else if(len==3){group4.put("label_1",STR[1]);group4.put("label_2",STR[2]);group4.put("label_3","null");}
+        else {group4.put("label_1",STR[1]);group4.put("label_2",STR[2]);group4.put("label_3",STR[3]);}
+
+       return fileUploadDao.getVideoinfo(group4);
 
     }
 

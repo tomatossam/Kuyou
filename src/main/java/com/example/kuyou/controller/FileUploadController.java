@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class FileUploadController {
@@ -68,10 +69,10 @@ public class FileUploadController {
 
     //短视频上传
     @RequestMapping(value = "camera/upload",method = RequestMethod.POST)
-    public String uploadVideo(@RequestParam long v_creator, @RequestParam String position,@RequestParam  int m_id,
-                              @RequestParam  String label,@RequestParam String v_description,@RequestParam("fileName") MultipartFile file){
+    public Map<String, Object> uploadVideo(@RequestParam long v_creator, @RequestParam String position, @RequestParam  int m_id,
+                                           @RequestParam  String label, @RequestParam String v_description, @RequestParam("fileName") MultipartFile file){
 
-        if (file.isEmpty()) { return "上传文件不可为空"; }
+        if (file.isEmpty()) { return null; }
 
         //获取文件名
         String fileName = String.valueOf(fileUploadService.getVideocount()+1)+".mp4";
@@ -93,7 +94,7 @@ public class FileUploadController {
             System.out.print("保存短视频文件路径"+path+"\n");
             v_content=fileName;//本地运行项目
         } catch (IOException e) {
-            return "上传失败";
+            return null;
         }
 
         try {
